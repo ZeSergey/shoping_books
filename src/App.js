@@ -1,11 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1> Event 12 02 12 </h1>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -22,4 +22,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+});
+
+
+// const mapDispatchToProps = state => ({
+//   ...state
+// });
+
+
+export default connect(mapStateToProps)(App);
