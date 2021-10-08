@@ -1,5 +1,13 @@
+
+
 import { combineReducers } from 'redux';
 
-import boooks from './boooks';
+import books from './books';
+import cart from './cart';
+// import filter from './filter';
 
-export default combineReducers({ boooks });
+export default combineReducers({
+  books,
+  cart,
+  // filter,
+});

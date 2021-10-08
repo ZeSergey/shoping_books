@@ -1,35 +1,58 @@
+
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { setBooks } from './actions/books';
+import axios from 'axios';
+
+import { Container, Card } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
+import './app.css';
 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1> Event 12 02 12 </h1>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Menu from './components/Menu';
+import BookCard from './components/BookCard';
+
+
+
+
+class App extends Component {
+  componentDidMount() {
+    const { setBooks } = this.props;
+    axios.get('/books.json').then(({ data }) => {
+      setBooks(data);
+    });
+  }
+  render() {
+    const { books, isReady } = this.props;
+    return (
+
+      <Container>
+        <Menu />
+        <Card.Group itemsPerRow={4}>
+          {
+            !isReady ? 'Загрузка ...' : books.map(book => (
+              <BookCard key={book.title} {...book} />
+            ))
+          }
+        </Card.Group>
+
+      </Container>
+
+    );
+  }
 }
 
-const mapStateToProps = state => ({
-  ...state
+
+const mapStateToProps = ({ books }) => ({
+  books: books.items,
+  isReady: books.isReady
 });
 
 
-// const mapDispatchToProps = state => ({
-//   ...state
-// });
+const mapDispatchToProps = dispatch => ({
+  setBooks: books => dispatch(setBooks(books))
+});
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(mapDispatchToProps)(App);
