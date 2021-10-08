@@ -1,16 +1,14 @@
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { setBooks } from './actions/books';
 import axios from 'axios';
-
 import { Container, Card } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
-import './app.css';
+import '../app.css';
 
 
-import Menu from './components/Menu';
-import BookCard from './components/BookCard';
+import Menu from './Menu';
+import BookCard from './BookCard';
+import Filter from '../containers/filter';
 
 
 
@@ -23,11 +21,12 @@ class App extends Component {
     });
   }
   render() {
-    const { books, isReady } = this.props;
+    const { books, isReady, } = this.props;
     return (
 
       <Container>
         <Menu />
+        <Filter />
         <Card.Group itemsPerRow={4}>
           {
             !isReady ? 'Загрузка ...' : books.map(book => (
@@ -43,16 +42,6 @@ class App extends Component {
 }
 
 
-const mapStateToProps = ({ books }) => ({
-  books: books.items,
-  isReady: books.isReady
-});
 
 
-const mapDispatchToProps = dispatch => ({
-  setBooks: books => dispatch(setBooks(books))
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-// export default connect(mapDispatchToProps)(App);
+export default App;
