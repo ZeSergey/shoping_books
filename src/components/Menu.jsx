@@ -26,6 +26,7 @@ const MenuComponents = () => (
       >
         Корзина:  &nbsp; <b>0</b>
       </Menu.Item>
+
     </Menu.Menu>
   </Menu>
 );
