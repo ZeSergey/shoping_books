@@ -6,9 +6,10 @@ import 'semantic-ui-css/semantic.min.css';
 import '../app.css';
 
 
-import Menu from './Menu';
-import BookCard from './BookCard';
-import Filter from '../containers/filter';
+
+import BookCard from '../containers/BookCard';
+import Filter from '../containers/Filter';
+import Menu from '../containers/Menu';
 
 
 
